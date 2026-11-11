@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="RopuchTheGame/RopuchTheGame.vcxproj" />
+  <Project Path="RopuchTheGame/RopuchTheGame.vcxproj" Id="87d8f93c-ac74-42d7-999a-69e6af9fb71e" />
 </Solution>
