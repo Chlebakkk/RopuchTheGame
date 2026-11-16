@@ -19,10 +19,24 @@ public:
         shape.setPosition(position);
     }
 
-    //reagowanie na klawisze
     void update() {
-        //tu bedzie wsad
         shape.setPosition(position);
+    }
+
+    //chodzenie
+    void handleInput(sf::Keyboard::Key key) {
+        if (key == sf::Keyboard::Key::W || key == sf::Keyboard::Key::Up && position.y - speed >= 0.0f) {
+            position.y -= speed;
+        }
+        else if (key == sf::Keyboard::Key::S || key == sf::Keyboard::Key::Down && position.y + speed < 600.0f) {
+            position.y += speed;
+        }
+        else if (key == sf::Keyboard::Key::A || key == sf::Keyboard::Key::Left && position.x - speed >= 0.0f) {
+            position.x -= speed;
+        }
+        else if (key == sf::Keyboard::Key::D || key == sf::Keyboard::Key::Right && position.x + speed < 800.0f) {
+            position.x += speed;
+        }
     }
 
     void draw(sf::RenderWindow& window) const {
@@ -84,6 +98,10 @@ public:
         }
         player.draw(window); //Stawiam ropucha "na" pasach- taki podział na warstwy
     }
+
+    void handleInput(sf::Keyboard::Key key) {
+        player.handleInput(key);
+    }
 };
 
 
@@ -99,6 +117,9 @@ int main() {
         while (const std::optional event = window.pollEvent()) {
             if (event->is<sf::Event::Closed>()) {
                 window.close();
+            }
+            if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>()) {
+                gameWorld.handleInput(keyPressed->code);
             }
         }
 
